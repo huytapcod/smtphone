@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /identity
+
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/HQShop?useSSL=false&serverTimezone=UTC"
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+jwt:
+  signerKey: "Z9rBKQTObcpiISqM+Q5hfqT6zXFuuOC6MhqwMcKx/IprAqt7U8QXrzgFmJkzTBOz"
