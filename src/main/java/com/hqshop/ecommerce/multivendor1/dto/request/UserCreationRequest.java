@@ -15,11 +15,18 @@ public class UserCreationRequest {
     @Size(min = 3, max = 50, message = "USERNAME_INVALID")
     private String name;
 
+     @NotBlank(message = "Email không được để trống")
+    @Email(message = "Email không hợp lệ")
+    private String email;
+    
     @Size(min = 8, message = "PASSWORD_INVALID")
     private String password;
-    private String email;
-    private String phone;
-    private String address;
+
+    @NotBlank(message = "Xác nhận mật khẩu không được để trống")
+    private String confirmPassword;
+
+    // private String phone;
+    // private String address;
 
 
 

@@ -27,9 +27,35 @@ public class UserController {
 
     @PostMapping
     ApiResponse<User> ceationUser(@RequestBody @Valid UserCreationRequest request){
-        ApiResponse<User> apiReponse = new ApiResponse<>();
-        apiReponse.setResult(userService.createUser(request));
-        return apiReponse;
+        // ApiResponse<User> apiReponse = new ApiResponse<>();
+        // apiReponse.setResult(userService.createUser(request));
+        // return apiReponse;
+        if (!request.getPassword().equals(request.getConfirmPassword())) {
+            return ResponseEntity.badRequest().body(
+                ApiResponse.<User>builder()
+                    .success(false)
+                    .message("Mật khẩu xác nhận không khớp")
+                    .build()
+            );
+        }
+
+        try {
+            User createdUser = userService.createUser(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                ApiResponse.<User>builder()
+                    .success(true)
+                    .message("Đăng ký thành công")
+                    .result(createdUser)
+                    .build()
+            );
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(
+                ApiResponse.<User>builder()
+                    .success(false)
+                    .message(e.getMessage()) // Ví dụ: "Email đã tồn tại"
+                    .build()
+            );
+        }
     }
     @GetMapping
     ApiResponse<List<UserResponse>> getUsers() {

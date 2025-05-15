@@ -43,12 +43,7 @@ public class CartService {
 
     public Cart findUserCart(User user) {
 //        Cart cart = cartRepository.findByUserId(user.getId());
-        Cart cart = cartRepository.findByUser(user).orElseGet(() -> {
-            Cart newCart = new Cart();
-            newCart.setUser(user); // dùng đối tượng User, không dùng ID
-            newCart.setCartItem(new HashSet<>());
-            return cartRepository.save(newCart);
-        });
+        Cart cart = cartRepository.findByUserId(user.getId());
 
         int totalPrice = 0;
         int totalDiscountePercent = 0;

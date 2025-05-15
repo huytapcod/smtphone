@@ -34,6 +34,7 @@ public class UserService {
 
     @Transactional
     public User createUser(UserCreationRequest request){
+       
         if(userRepository.existsByName(request.getName())){
             throw new AppException(Errorcode.USER_EXISTED);
         }
@@ -45,6 +46,17 @@ public class UserService {
         user.setRoles(roles);
         return userRepository.save(user);
     }
+    //     if(userRepository.existsByName(request.getName())){
+    //         throw new AppException(Errorcode.USER_EXISTED);
+    //     }
+    //     User user = userMapper.toUser(request);
+    //     user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+    //     HashSet<String> roles = new HashSet<>();
+    //     roles.add(Roles.CUSTOMER.name());
+    //     user.setRoles(roles);
+    //     return userRepository.save(user);
+    // }
 //    public List<User> getAllUsers() {
 //        return userRepository.findAll();
 //    }

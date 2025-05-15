@@ -23,7 +23,7 @@ public class PaymentOrder {
 
     private PaymentOrderStatus status = PaymentOrderStatus.PENDING;
 
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
     private String paymentLinkId;
 
